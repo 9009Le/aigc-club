@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="F9IFa4v4ZKFeNo0f6qHgLK">
+<head data-page-node-id="9LcVTsO2oedG8tSXY5GOer">
+<meta charset="UTF-8" data-page-node-id="N3qkks3DZcT2BAiJQErSHC" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="eI9OOBIFiB2WoGLD0zbkEo" />
+<title>AIGC视界社 —— 打开AI时代的创作视界</title>
+<meta name="description" content="校园 AI 视频创作社团招新。依托 MiniMax H3、ComfyUI 等多模态大模型与开源工具，做 AIGC 短剧、部门宣传片、培训交流视频。" />
+<meta name="keywords" content="AIGC, 视频创作, 校园社团, 招新, MiniMax H3, ComfyUI, AI视频" />
+
+<!-- 微信 / 微博 / Facebook 分享卡片 -->
+<meta property="og:title" content="AIGC视界社 —— 打开AI时代的创作视界" />
+<meta property="og:description" content="校园 AI 视频创作社团招新：短剧、部门宣传片、培训视频，MiniMax H3 × ComfyUI 全流程实战。扫码加入我们。" />
+<meta property="og:image" content="assets/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="AIGC视界社" />
+<!-- Twitter 卡片（次要） -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="AIGC视界社 —— 打开AI时代的创作视界" />
+<meta name="twitter:description" content="校园 AI 视频创作社团招新。扫码加入我们。" />
+<meta name="twitter:image" content="assets/og-cover.png" />
+<style>
+  :root {
+    --bg-deep: #0a0e27;
+    --bg-mid: #131838;
+    --bg-light: #1a2050;
+    --accent-1: #6c5ce7;
+    --accent-2: #00d4ff;
+    --accent-3: #ff3e7f;
+    --accent-grad: linear-gradient(135deg, #6c5ce7 0%, #00d4ff 100%);
+    --accent-grad-warm: linear-gradient(135deg, #ff3e7f 0%, #ff8c42 100%);
+    --text-1: #ffffff;
+    --text-2: rgba(255,255,255,0.78);
+    --text-3: rgba(255,255,255,0.5);
+    --border: rgba(255,255,255,0.12);
+    --card: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.08);
+    --shadow: 0 24px 60px rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-1);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* 背景动效 */
+  body::before {
+    content: "";
+    position: fixed;
+    top: -20%; left: -20%;
+    width: 60%; height: 60%;
+    background: radial-gradient(circle, rgba(108,92,231,0.35), transparent 60%);
+    filter: blur(80px);
+    z-index: -2;
+    animation: floatA 18s ease-in-out infinite;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: -20%; right: -20%;
+    width: 70%; height: 70%;
+    background: radial-gradient(circle, rgba(0,212,255,0.25), transparent 60%);
+    filter: blur(80px);
+    z-index: -2;
+    animation: floatB 22s ease-in-out infinite;
+  }
+  @keyframes floatA { 0%,100% { transform: translate(0,0); } 50% { transform: translate(80px, 60px); } }
+  @keyframes floatB { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-80px, -60px); } }
+
+  /* 网格背景 */
+  .grid-bg {
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    z-index: -1;
+  }
+
+  /* 通用 */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 100px 0; position: relative; }
+  h2 {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 18px;
+  }
+  h2 .grad {
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-sub {
+    font-size: 18px; color: var(--text-2); max-width: 720px;
+  }
+  .eyebrow {
+    display: inline-block; padding: 6px 14px;
+    background: rgba(108,92,231,0.15);
+    border: 1px solid rgba(108,92,231,0.3);
+    border-radius: 999px;
+    font-size: 13px; color: var(--accent-2);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* ============= HERO ============= */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 80px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px; color: var(--text-2);
+    margin-bottom: 28px;
+  }
+  .hero-badge .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #00ff88;
+    box-shadow: 0 0 12px #00ff88;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero h1 {
+    font-size: clamp(48px, 7vw, 84px);
+    font-weight: 900; letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .hero h1 .grad {
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 .warm {
+    background: var(--accent-grad-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-desc {
+    font-size: 19px; color: var(--text-2);
+    max-width: 560px; margin-bottom: 36px;
+  }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .stat .num {
+    font-size: 32px; font-weight: 800;
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat .label { font-size: 13px; color: var(--text-3); letter-spacing: 0.05em; }
+
+  /* Hero 视频位 */
+  .hero-video {
+    position: relative;
+    aspect-ratio: 16/9;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-light));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .hero-video .hero-video-el,
+  .hero-video video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-video .badge-tag {
+    position: absolute; top: 16px; left: 16px;
+    padding: 4px 12px;
+    background: rgba(0,212,255,0.15);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--accent-2);
+    letter-spacing: 0.1em;
+    z-index: 2;
+  }
+
+  /* ============= ABOUT ============= */
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .about-card {
+    padding: 36px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-card::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--accent-grad);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .about-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(108,92,231,0.3);
+    transform: translateY(-4px);
+  }
+  .about-card:hover::before { transform: scaleX(1); }
+  .about-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.2), rgba(0,212,255,0.2));
+    margin-bottom: 20px;
+  }
+  .about-card h3 {
+    font-size: 22px; font-weight: 700; margin-bottom: 12px;
+  }
+  .about-card p {
+    font-size: 15px; color: var(--text-2);
+  }
+
+  /* ============= STACK ============= */
+  .stack-wrap {
+    margin-top: 60px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,212,255,0.05));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+  }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .stack-item {
+    padding: 24px 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .stack-item:hover {
+    background: rgba(108,92,231,0.1);
+    border-color: rgba(108,92,231,0.4);
+    transform: translateY(-2px);
+  }
+  .stack-item .name {
+    font-size: 18px; font-weight: 700; margin-bottom: 6px;
+    color: var(--text-1);
+  }
+  .stack-item .role {
+    font-size: 13px; color: var(--text-3);
+  }
+  .stack-item .badge-h3 {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 2px 8px;
+    background: var(--accent-grad);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* ============= CAPABILITIES ============= */
+  .caps-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 60px;
+  }
+  .caps-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+  }
+  .cap-card {
+    padding: 28px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .cap-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(0,212,255,0.3);
+    transform: translateY(-3px);
+  }
+  .cap-num {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 32px; font-weight: 900;
+    color: rgba(255,255,255,0.06);
+  }
+  .cap-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.15), rgba(0,212,255,0.15));
+    margin-bottom: 16px;
+  }
+  .cap-card h4 {
+    font-size: 17px; font-weight: 700;
+    margin-bottom: 8px; color: var(--text-1);
+  }
+  .cap-card p {
+    font-size: 13.5px; color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* 视频展示廊 */
+  .video-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .video-slot {
+    position: relative;
+    aspect-ratio: 16/9;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--bg-mid), var(--bg-light));
+    border: 1px dashed rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .video-slot:hover {
+    border-color: rgba(108,92,231,0.5);
+    transform: scale(1.02);
+  }
+  .video-slot .tag {
+    position: absolute; top: 12px; left: 12px;
+    padding: 4px 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    font-size: 11px; color: var(--accent-2);
+    z-index: 2;
+  }
+  .video-slot .slot-video,
+  .video-slot video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .video-slot:hover video { transform: scale(1.04); }
+
+  /* ============= GAINS ============= */
+  .gains-wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 60px;
+  }
+  .gain-card {
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    position: relative;
+  }
+  .gain-card h4 {
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .gain-card .ico {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    background: linear-gradient(135deg, rgba(255,62,127,0.2), rgba(255,140,66,0.2));
+  }
+  .gain-card ul {
+    list-style: none;
+  }
+  .gain-card li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    color: var(--text-2);
+    font-size: 15px;
+  }
+  .gain-card li::before {
+    content: "▸";
+    position: absolute; left: 0;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  /* ============= PATH ============= */
+  .path-wrap {
+    margin-top: 60px;
+    position: relative;
+  }
+  .path-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+    align-items: start;
+  }
+  .path-step .num {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--accent-grad);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800;
+    color: white;
+    box-shadow: 0 8px 24px rgba(108,92,231,0.4);
+  }
+  .path-step .body {
+    padding: 24px 28px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+  }
+  .path-step .body h4 {
+    font-size: 19px; font-weight: 700; margin-bottom: 8px;
+  }
+  .path-step .body p {
+    font-size: 14.5px; color: var(--text-2);
+  }
+  .path-step .body .weeks {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 3px 10px;
+    background: rgba(0,212,255,0.12);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--accent-2);
+  }
+
+  /* ============= REQUIREMENTS ============= */
+  .req-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .req-card {
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+  .req-card h4 {
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--accent-2);
+  }
+  .req-card ul { list-style: none; }
+  .req-card li {
+    padding: 10px 0 10px 28px;
+    position: relative;
+    color: var(--text-2);
+    font-size: 15px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .req-card li:last-child { border-bottom: none; }
+  .req-card li::before {
+    content: "✓";
+    position: absolute; left: 0;
+    color: #00ff88;
+    font-weight: 800;
+  }
+
+  /* QR Code 区 */
+  .qr-card {
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.1), rgba(0,212,255,0.08));
+    border: 1px solid rgba(108,92,231,0.25);
+    border-radius: 24px;
+    text-align: center;
+    position: relative;
+  }
+  .qr-card::before {
+    content: "";
+    position: absolute; inset: -2px;
+    background: var(--accent-grad);
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0.4;
+    filter: blur(20px);
+  }
+  .qr-card h4 {
+    font-size: 24px; font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .qr-card .sub {
+    color: var(--text-2);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .qr-img {
+    width: 240px; height: 240px;
+    margin: 0 auto;
+    background: white;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+  }
+  .qr-img img {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .qr-note {
+    margin-top: 20px;
+    font-size: 12px; color: var(--text-3);
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* ============= FOOTER ============= */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+  }
+  footer .brand {
+    font-size: 28px; font-weight: 800;
+    background: var(--accent-grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  footer .slogan { color: var(--text-2); margin-bottom: 24px; font-size: 15px; }
+  footer .meta {
+    color: var(--text-3); font-size: 13px;
+    display: flex; justify-content: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  footer .meta a {
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  footer .meta a:hover { color: var(--accent-2); }
+
+  /* 响应式 */
+  @media (max-width: 900px) {
+    h2 { font-size: 32px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .about-grid, .stack-grid, .caps-list, .video-gallery, .gains-wrap, .req-wrap {
+      grid-template-columns: 1fr;
+    }
+    .caps-intro { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    section { padding: 70px 0; }
+    .path-step { grid-template-columns: 1fr; }
+    .qr-img { width: 200px; height: 200px; }
+  }
+
+  /* 滚动淡入 */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body data-page-node-id="kBcojjD6aAm64R3v5A0R8X">
+<div class="grid-bg" data-page-node-id="K9CUGHa804G6TrhRyAzTpR"></div>
+
+<!-- ============= HERO ============= -->
+<section class="hero" data-page-node-id="b3IadN0MPZFuGFmusgI3tG">
+  <div class="container" data-page-node-id="Rpp6VavQxWPNn3ebNdVz69">
+    <div class="hero-grid" data-page-node-id="iaf2O4vWMFPxklpHdU7jSm">
+      <div class="hero-text" data-page-node-id="SZnHEFriWLrqduaMbak32B">
+        <span class="hero-badge" data-page-node-id="Uxpqne5eB1TIbVCJsVMt7h">
+          <span class="dot" data-page-node-id="MY7iVE3PqJym3ZEhcEPjOP"></span>
+          欢迎热爱 AIGC 的你
+        </span>
+        <h1 data-page-node-id="VBG35MQSKa0ZYkC0AA3jzm">
+          <span class="grad" data-page-node-id="lkLP5ke6Ki5hkhrpDgWAsZ">AIGC</span><br data-page-node-id="zf6bM4CLMcpR86Sf6i89Ya"/>
+          <span class="warm" data-page-node-id="ymIot6FL8XcDerYsogoPnE">视界社</span>
+        </h1>
+        <p class="hero-desc" data-page-node-id="oq4hgiwkK3OwxJZVtoVUU9">
+          打开 AI 时代的创作视界。<br data-page-node-id="Z5AwiB7bzCIKzqT590Ambn"/>
+          从一段提示词到一段完整视频，<br data-page-node-id="VBGoA7QVEC4lxcSJFUBhra"/>
+          我们一起把脑洞变成可以播放的视界。
+        </p>
+        <div class="hero-stats" data-page-node-id="KEAF9EW9GFJqm4KzFY1Bzj">
+          <div class="stat" data-page-node-id="ObFXg3y2nc9wBsV86WEcr5">
+            <div class="num" data-page-node-id="Q9HHmT2j3tyZpuxuBSUzVu">∞</div>
+            <div class="label" data-page-node-id="1vsgHTgs9JK5AvC3QgGjOy">创意边界</div>
+          </div>
+          <div class="stat" data-page-node-id="6uz5475VHhOYDNWAGoveWS">
+            <div class="num" data-page-node-id="WGGSiTzAayzGpH3Cpq2RQt">3</div>
+            <div class="label" data-page-node-id="FtgZ0THuJw3KWGBcuOu48e">核心业务方向</div>
+          </div>
+          <div class="stat" data-page-node-id="FviyEfpIj0aWRV5ktTv0in">
+            <div class="num" data-page-node-id="remb3eK4yvwKIuRnIcAx7C">10+</div>
+            <div class="label" data-page-node-id="zxNvnL2IQztaV2JpbNlrEX">视频能力维度</div>
+          </div>
+          <div class="stat" data-page-node-id="4jPsdmkfoK4RUJY1QQdYp0">
+            <div class="num" data-page-node-id="sTAqPYAkOm9mf1tj9d9ZCS">∞</div>
+            <div class="label" data-page-node-id="TRyRF6CUpSiKzk7nAqB8Eg">创意边界</div>
+          </div>
+        </div>
+      </div>
+      <!-- HERO 主视觉视频 -->
+      <div class="hero-video" data-page-node-id="SDqXGvarFHXRuQDnaFDxsb">
+        <span class="badge-tag" data-page-node-id="gQMzJ0TdlTBUluzb0vV0lL">HERO SHOWREEL</span>
+        <video class="hero-video-el" autoplay loop muted playsinline data-page-node-id="9X7h2K8Wq3M5tBnL4PjRc6">
+          <source src="assets/hero-showreel.mp4" type="video/mp4" />
+          您的浏览器不支持 video 标签。
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= ABOUT ============= -->
+<section id="about" data-page-node-id="c6htGyDrrJezrvGouTa0Pm">
+  <div class="container" data-page-node-id="JimzQJE5k7wv9gb34LZWJV">
+    <div class="reveal" data-page-node-id="kQTfvlm8FKIEYkXqILQeth">
+      <span class="eyebrow" data-page-node-id="Ha2Cm2KttDYjAewfqzLrKe">社团定位</span>
+      <h2 data-page-node-id="iVu8nGMWIXRaNG2tF5laAE">我们是做什么的<span class="grad" data-page-node-id="6gXZPFLOSClSCb61cnY6OI">？</span></h2>
+      <p class="section-sub" data-page-node-id="UWUmXcyFwhNRWDUqpmF3eB">
+        AIGC 视界社是一支专注 AI 视频创作的校园团队。<br data-page-node-id="jHxBwrvLGgoWlohvy2XN7e"/>
+        围绕 MiniMax H3 等多模态大模型和 ComfyUI 等开源工具，
+        我们做内容、做项目、做研究——把 AI 视频从"能跑"推进到"能交付"。
+      </p>
+    </div>
+
+    <div class="about-grid" data-page-node-id="J86gl5ZeucfYi4TpLdzNjz">
+      <div class="about-card reveal" data-page-node-id="AyYpZe4HDGz6mle5YwltUg">
+        <div class="about-icon" data-page-node-id="cJmUpfFHOqmgR5qBdauHoe">🎭</div>
+        <h3 data-page-node-id="lS8iFQz31m0yPCjkmUfvCp">AIGC 短剧</h3>
+        <p data-page-node-id="Gej6u372DazclPi5dtultA">原创剧本 × AI 分镜 × 智能生成，产出可发布、可参赛的校园短剧作品。
+           从科幻、古风到都市情感，题材不限，让 AI 当你的"摄影棚"。</p>
+      </div>
+      <div class="about-card reveal" data-page-node-id="B8Dl9fEI5qEIYDp4FyfkU2">
+        <div class="about-icon" data-page-node-id="t4rvp6agBcOiTi7n9oIARH">📣</div>
+        <h3 data-page-node-id="Gi33uymAHF932ADqwvgNn6">部门宣传片</h3>
+        <p data-page-node-id="ZZELsToMYINNcNdtw6y3J6">承接校内各部门、二级学院的宣传片、汇报片、招生片等真实业务需求。
+           在真实项目里练手，把作品写进简历。</p>
+      </div>
+      <div class="about-card reveal" data-page-node-id="YNKbSYrl88U6w7W9eLqKhf">
+        <div class="about-icon" data-page-node-id="f8WahJ4NBmRJa69mdhydLE">🎓</div>
+        <h3 data-page-node-id="KsD8niQk0yWOunfyeWTlP3">培训与交流视频</h3>
+        <p data-page-node-id="yaB7OzdyLvCAxA97Y76yRH">社团内部技术分享、跨院校 AIGC 交流、教学案例库建设。
+           既当学员又当讲师，打造校园 AIGC 学习共同体。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= STACK ============= -->
+<section id="stack" data-page-node-id="9GrORnarqu0qv3tm5yzN23">
+  <div class="container" data-page-node-id="5npIyG8yC1wZH3elB2eMF2">
+    <div class="reveal" data-page-node-id="hq5MoOBtmq99MmApukPDHb">
+      <span class="eyebrow" data-page-node-id="AX7JNWgy9bFDNa0O9P4fkU">技术栈</span>
+      <h2 data-page-node-id="e7jSBmnjEyCv9iTAai7Q29">我们用这些<span class="grad" data-page-node-id="ZynH2HTUtjBBSaNPdHx4zo">硬核工具</span></h2>
+      <p class="section-sub" data-page-node-id="r6XLnOqZC5j8MLpzcpeI8p">
+        从闭源大模型到开源节点式工作流，从文本提示到多模态融合——
+        我们不押注单一工具，而是搭起一条真正可出片的创作流水线。
+      </p>
+    </div>
+
+    <div class="stack-wrap reveal" data-page-node-id="8Xj22Ui3Yj627kufIJXmKh">
+      <div class="stack-grid" data-page-node-id="V1oGfTWf3E4IZroLo5YF0L">
+        <div class="stack-item" data-page-node-id="aTs5yZUzcgkHFwuqKU5Dic">
+          <div class="name" data-page-node-id="VroPVDeyOVD2pzUY8uj5mL">🐚 MiniMax H3</div>
+          <div class="role" data-page-node-id="rteAWpzw9sr7b2LDhYfqWc">多模态视频大模型</div>
+          <span class="badge-h3" data-page-node-id="dmxapkWQcL8tMMQBH8gfHU">核心模型</span>
+        </div>
+        <div class="stack-item" data-page-node-id="RwiHbsGvDqAvWCXghqQ9GZ">
+          <div class="name" data-page-node-id="DUDW1skZwUBEDcqboybjO3">🧩 ComfyUI</div>
+          <div class="role" data-page-node-id="FVMI1WaEMNFmDEiKAdA842">节点式 AI 工作流</div>
+        </div>
+        <div class="stack-item" data-page-node-id="8kVA5gtopaW2iQEk5NOcut">
+          <div class="name" data-page-node-id="9rBZNUNqSu16w74mKEieev">🎬 MiniMax Design</div>
+          <div class="role" data-page-node-id="Grue5uYVtCfInBr0F8cPzi">桌面端视频生成</div>
+        </div>
+        <div class="stack-item" data-page-node-id="y7qZJdFeHJp5uOAHfRkz6x">
+          <div class="name" data-page-node-id="V2snDmCzCbjt08iSFOpQTk">🌀 海螺 AI 体验中心</div>
+          <div class="role" data-page-node-id="R6RMYtMopKKeJyAhOXavwU">在线创意平台</div>
+        </div>
+        <div class="stack-item" data-page-node-id="I70FoBKhrFT803Mlak3ThZ">
+          <div class="name" data-page-node-id="Eb9pvniY8KP13ZAoVhqtaY">⚙️ Stable Diffusion</div>
+          <div class="role" data-page-node-id="n32Mwa2Lk1bhYvHCTc2VRK">图像与风格控制</div>
+        </div>
+        <div class="stack-item" data-page-node-id="roX7AhRp3oRa6XICsDJyI0">
+          <div class="name" data-page-node-id="PPVOpjqWExnOvTA2SxInl4">🎞️ FFmpeg / DaVinci</div>
+          <div class="role" data-page-node-id="FIMg02BvfxoW3mXCZ1PRQE">后期合成与剪辑</div>
+        </div>
+        <div class="stack-item" data-page-node-id="jeEHPoYOtpwICP5Ri8mVXL">
+          <div class="name" data-page-node-id="n61szFgfywUMz5CNTR55BI">📝 提示词工程</div>
+          <div class="role" data-page-node-id="XjpIyrlRXVnX0WNFbwIpi5">Prompt Engineering</div>
+        </div>
+        <div class="stack-item" data-page-node-id="hi60q6unOknOqdBSAFdLBa">
+          <div class="name" data-page-node-id="xhSnBNZJVikYX6Rrc3D1SY">🎤 数字人 / TTS</div>
+          <div class="role" data-page-node-id="Lta15qz15fuzThN2pLkUYG">声音克隆与配音</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= CAPABILITIES ============= -->
+<section id="capabilities" data-page-node-id="JHb6P6DoxTpK8QBRtNvX8m">
+  <div class="container" data-page-node-id="anDh8iSwqAkFfPLbsL5xkE">
+    <div class="reveal" data-page-node-id="kTZLdEAXteifuGAv8BGuPC">
+      <span class="eyebrow" data-page-node-id="TYntI7SgaUQ5jcDrYqWEge">能力维度</span>
+      <h2 data-page-node-id="S9eLRR8AibDd4p76IN96sS"><span class="grad" data-page-node-id="X1qtzJFG18RWGDe6MPZfi1">主要应用场景</span></h2>
+      <p class="section-sub" data-page-node-id="aPYg90Tk3GA1Dpj8z2d876">
+        依托 H3 模型从"特化任务"迈向"通用多模态智能"的能力升级，
+        我们可以覆盖下面这些内容创作场景，全部带原生声音输出。
+      </p>
+    </div>
+
+    <div class="caps-list" data-page-node-id="KONJTRXjNt9Xjs0VeUHimy">
+      <div class="cap-card reveal" data-page-node-id="kAxiqCDyDK4HRjcLlEuizL">
+        <div class="cap-num" data-page-node-id="52KjvfnBhuHaJtWVH9dryp">01</div>
+        <div class="cap-icon" data-page-node-id="n1aOwjlq2UCBCQebEZvwgd">🎥</div>
+        <h4 data-page-node-id="Nf0xtKO7jlpv5x7y7jDTuc">品牌大片与影视内容</h4>
+        <p data-page-node-id="AFvveUcD1JrIffmoeyyxTx">电影预告片、TVC 广告片、品牌质感大片。短片分镜、风格统一、镜头语言丰富。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="fxs9Eg6i1sziIRvnkjanVm">
+        <div class="cap-num" data-page-node-id="wLiI0im9b85oZhXyGrgPJG">02</div>
+        <div class="cap-icon" data-page-node-id="KNJjOD36k59HHi0tOZIMmh">✨</div>
+        <h4 data-page-node-id="NI8Te2IiIRS3uTWnleQY7l">视觉创意与内容包装</h4>
+        <p data-page-node-id="tx3r78ajvIYFvlDwE4L0fK">创意短片、特效包装、审美 MV、视觉实验、热点内容及社媒素材。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="e5gUM5JxF84AVQDXb9CeLe">
+        <div class="cap-num" data-page-node-id="8PoZX82qBN3F6Rqy2POiN7">03</div>
+        <div class="cap-icon" data-page-node-id="Os6nHqDEik27xGeApwa5HV">🌀</div>
+        <h4 data-page-node-id="ldRi9JAw3RE9iHaPPlF2h4">动态图形 / MG 动画 / AE 特效</h4>
+        <p data-page-node-id="Zy2JWyBSPFVkzcROKOuUKH">品牌片头、产品演示、数据可视化、抽象科技短片、节点动画。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="hMLCXsMdYwjswArYgh3A8a">
+        <div class="cap-num" data-page-node-id="OBlFLlfyXZYgY0fFHEMSPH">04</div>
+        <div class="cap-icon" data-page-node-id="5tjWxwpPllVdpVlBYMwT7e">📱</div>
+        <h4 data-page-node-id="TgItRLWRlwLcyysJR8jgkf">AR 现实增强创意视频</h4>
+        <p data-page-node-id="f6FTcEs7e5c7CCa6FzQng2">巨物营销、户外视觉、社媒传播素材，让高成本 AR 创意更高效实现。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="70SyuaF0TvKGUEr7x9LlCE">
+        <div class="cap-num" data-page-node-id="gyFAutHNHQi0JUBEJ8B6GB">05</div>
+        <div class="cap-icon" data-page-node-id="guwu3oWFrO8MGvxcliBWh4">🎬</div>
+        <h4 data-page-node-id="1yC13zkPULer5CxtA3jIlG">AI 剧情内容创作</h4>
+        <p data-page-node-id="t0M5om5V8w05UaXyXP6EP0">古风武侠、悬疑、都市情感——AI 分镜 + 风格化短剧。社团短剧的主战场。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="JZfrPlUIPV0Zo0U0LqcU7Z">
+        <div class="cap-num" data-page-node-id="bzClnXnk6bFiHBxk6yyWxI">06</div>
+        <div class="cap-icon" data-page-node-id="AJUWGGF0wF34DCyzwaLwIO">🛍️</div>
+        <h4 data-page-node-id="HZfW4ONmj0AceYGxqsEOSo">产品与电商营销</h4>
+        <p data-page-node-id="JqiujVOjIIGVpmEvA4jfCU">商品 360° 展示、模特上身、电商主图视频、品牌种草短视频。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="eR1ffVCqQ42xHYat5TuvEI">
+        <div class="cap-num" data-page-node-id="yWwFVmZwfd8eO7mwbq1KT5">07</div>
+        <div class="cap-icon" data-page-node-id="iPzNpltjFpDcgxp19fUjL7">🎮</div>
+        <h4 data-page-node-id="MURDE2bQrShN8p7qtAgDGS">数字体验与游戏创意</h4>
+        <p data-page-node-id="atxvMClXS5IkTAGfSzQKXk">游戏 CG、过场动画、UI 演示、第一人称视角、角色 PV。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="sfHSEfpucOwWCLB4GQ5SOo">
+        <div class="cap-num" data-page-node-id="HbDse4lgPfQ2Y1ZJSDAbCq">08</div>
+        <div class="cap-icon" data-page-node-id="XwpvGnGDueJI3aBrhfpWHt">🏭</div>
+        <h4 data-page-node-id="qEISvpRbAAbWUxy1OsD5qO">硬件 / 工业 / 具身智能演示</h4>
+        <p data-page-node-id="lz23J1wxl7xGPc5CONQ9YB">工业场景、机械臂演示、机器人动作可视化、实验室展示。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="C9fCtVd9rGXIj7FYhcH1iJ">
+        <div class="cap-num" data-page-node-id="LH71WFuWl1lvEFhwZEruRQ">09</div>
+        <div class="cap-icon" data-page-node-id="aM7EDzjhle9w0Ht3ZtZ5Wd">🎨</div>
+        <h4 data-page-node-id="7vic3iR0SiKw6f6bQLrdwQ">动画与风格化影像</h4>
+        <p data-page-node-id="5XlZhYhwBz021DTW9Zj9Fh">2D/3D 风格化短片、乙游 PV、二次元动画、风格化 PV 制作。</p>
+      </div>
+      <div class="cap-card reveal" data-page-node-id="Fy4aH2meOEgpAjmPcg0f5c">
+        <div class="cap-num" data-page-node-id="XHOciU8ZE5ZUjguXSsgGpf">10</div>
+        <div class="cap-icon" data-page-node-id="L1SFdOsl50FKbmr6zOnSHL">🌏</div>
+        <h4 data-page-node-id="R5GGS5RvZJjXsKnciSS1Fu">出海多语种场景</h4>
+        <p data-page-node-id="TvR4UUYAGckDUhGcQlnC3l">11 种 TTS 语言、跨境品牌片、多语种广告与本地化产品介绍。</p>
+      </div>
+    </div>
+
+    <!-- 作品视频展示廊 -->
+    <div class="video-gallery reveal" data-page-node-id="THH7ccd1bMRXcn9XHRRCY2">
+      <!-- 示例作品 1 · 品牌大片 -->
+      <div class="video-slot" data-page-node-id="Nij2x7alUuAB9UY3eCPSDG">
+        <span class="tag" data-page-node-id="QpBpRptZpWfZjClHSYE3T9">示例 1 · 品牌大片</span>
+        <video class="slot-video" autoplay loop muted playsinline data-page-node-id="Vp7Y3LcRf8B6nQ2XmK9WjH">
+          <source src="assets/sample-brand.mp4" type="video/mp4" />
+          您的浏览器不支持 video 标签。
+        </video>
+      </div>
+      <!-- 示例作品 2 · AI 短剧 -->
+      <div class="video-slot" data-page-node-id="LwItBYBFPJ86CO2eDfNLMf">
+        <span class="tag" data-page-node-id="34NgvhLwsLsKcCGwL65C4V">示例 2 · AI 短剧</span>
+        <video class="slot-video" autoplay loop muted playsinline data-page-node-id="Gt4Z6MxBp1H8vN3YjL5SdF">
+          <source src="assets/sample-drama.mp4" type="video/mp4" />
+          您的浏览器不支持 video 标签。
+        </video>
+      </div>
+      <!-- 示例作品 3 · MG 动画 -->
+      <div class="video-slot" data-page-node-id="FZ9OE0NN9KMzTc5G03KuoB">
+        <span class="tag" data-page-node-id="iuY4jJmhwRC0yEGyTZH4NU">示例 3 · MG 动画</span>
+        <video class="slot-video" autoplay loop muted playsinline data-page-node-id="Wq2R9KcMp4T7nF1XvJ8BhN">
+          <source src="assets/sample-mg.mp4" type="video/mp4" />
+          您的浏览器不支持 video 标签。
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= GAINS ============= -->
+<section id="gains" data-page-node-id="vO9IhxQx9pCw4ATz6MqgAA">
+  <div class="container" data-page-node-id="VtUF5T5sZWGWe4KBw7Mzch">
+    <div class="reveal" data-page-node-id="1SkXEbkUwJro8Ad7t8dwaH">
+      <span class="eyebrow" data-page-node-id="pFkMBStI3JxqOf88HoKGRQ">你能收获</span>
+      <h2 data-page-node-id="daJvImXxG7HuHKov81FD4H">加入社团后<span class="grad" data-page-node-id="jd3P4VrJFeAbgxEp6G1265">你能获得什么</span>？</h2>
+      <p class="section-sub" data-page-node-id="RDjgb23GrGyyEGkfe74ird">不是空喊口号，是真东西——作品集、技术栈、真项目、跨院人脉。</p>
+    </div>
+
+    <div class="gains-wrap" data-page-node-id="kI1usIG2Do8WiT674AUQwv">
+      <div class="gain-card reveal" data-page-node-id="arg6XiQu3Cg8uFmo4tt5M1">
+        <h4 data-page-node-id="gBtS55jzU8OADRbzBTOHBR"><span class="ico" data-page-node-id="kcLE8NcbB5JWsKVHR8E6zz">🚀</span>硬核技术能力</h4>
+        <ul data-page-node-id="6T72GEqnkOnEoHs9MHwljZ">
+          <li data-page-node-id="fvliMzyPtCqeFQQEEiFE7r">MiniMax H3 / ComfyUI 完整工作流实操</li>
+          <li data-page-node-id="A2pwXczp2LIE6iGLK0YFwv">提示词工程（Prompt Engineering）系统训练</li>
+          <li data-page-node-id="Fnh2lETVPiSSDIxYBJeXGH">镜头语言、构图、光影、节奏的影视化思维</li>
+          <li data-page-node-id="UkIxlYB4aau9o24wnjWTQl">多模态融合：文/图/音/视频联合参考生成</li>
+          <li data-page-node-id="c7TIt1NhHy5ZLWSba0hYA9">从分镜到成片的完整后期合成能力</li>
+        </ul>
+      </div>
+      <div class="gain-card reveal" data-page-node-id="FA6x5LoA2cqLg2cV7avtZW">
+        <h4 data-page-node-id="ecBnmxYpl0HFzeRda5X11m"><span class="ico" data-page-node-id="7XvuLnTT3B6RCvn1u8fYNX">💎</span>真实项目与作品集</h4>
+        <ul data-page-node-id="q9FuwCWRCZCNmgfLELvtMA">
+          <li data-page-node-id="WSJLG3oT5BjPGO1dhE4jpz">承接校内各部门真实宣传片订单</li>
+          <li data-page-node-id="XAKWhJDP24WVp1JDSUjcAJ">原创 AIGC 短剧署名作品</li>
+          <li data-page-node-id="ycDUsNGPnJeWsoLQN4wWBQ">AIGC 类竞赛、展映活动参赛资格</li>
+          <li data-page-node-id="j20sw7GBTf4d2WfiQStD4m">个人作品集 + 社团联名作品双重背书</li>
+        </ul>
+      </div>
+      <div class="gain-card reveal" data-page-node-id="Pwe9TC3Ci5ssJjlgupaOqo">
+        <h4 data-page-node-id="RSw09GeZM6JzzKXPeqJDGo"><span class="ico" data-page-node-id="jkMiRG5WYpP9FmxTXKZ0EP">🤝</span>人脉与资源</h4>
+        <ul data-page-node-id="lpi32FNn9JAF4L7v2246Bx">
+          <li data-page-node-id="sRzAsDmHL5n6ZPGgfjFbOA">跨学院、跨专业协作小组</li>
+          <li data-page-node-id="qjCHE3KUCGtngFaUQha1r0">对接校外 AIGC 厂商与技术社区</li>
+          <li data-page-node-id="r0cVaMw1YTY9k9JDNZJnMM">校内创客空间、工作站资源优先使用权</li>
+          <li data-page-node-id="zqwfMZ0KN3gIJZzVVVrDpf">校级活动嘉宾、师资推荐机会</li>
+        </ul>
+      </div>
+      <div class="gain-card reveal" data-page-node-id="NkHQ0rrRhUCNcwCQ8ehpnK">
+        <h4 data-page-node-id="NXpsbstdfieR6DmKhsFRks"><span class="ico" data-page-node-id="ea35Q0cvbjHgrztykPDKMo">🏆</span>成长与认可</h4>
+        <ul data-page-node-id="X2pzINO0KUSZgDwEpZJHgF">
+          <li data-page-node-id="NOypGcyoUPLibvH9PzOUnR">学时认定 / 综合素拓分 / 评优加分</li>
+          <li data-page-node-id="800mTmxMyc7YXt3flh8U9G">干部岗位（社长/技术总监/项目组长）历练</li>
+          <li data-page-node-id="eK9j3SD98j5C5c9u9MBSSs">校报、校官号专访曝光机会</li>
+          <li data-page-node-id="uRWpDGUakJtEDIP1tMkSBo">毕业季 AIGC 方向实习/就业内推</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PATH ============= -->
+<section id="path" data-page-node-id="JPbctwVjUlabpDdzbk9Q2l">
+  <div class="container" data-page-node-id="PFTD2WYfIuMfQQJksWzAyE">
+    <div class="reveal" data-page-node-id="Kd7V2BDH3NhnHFsuwAv0di">
+      <span class="eyebrow" data-page-node-id="nHGfBmeSmmzdW5RmkNqBrn">成长路径</span>
+      <h2 data-page-node-id="CrxFWGMu4kRqkTQIaXXPcC">从零基础到<span class="grad" data-page-node-id="beWHIylGH3P6YXLaAUUJiU">出片</span>，我们陪你走完这条路</h2>
+      <p class="section-sub" data-page-node-id="VtdpbHWe8ZImQ2a1BIFj5G">分四个阶段递进式培养，不要求你进来就是大神——只要你愿意学。</p>
+    </div>
+
+    <div class="path-wrap" data-page-node-id="6DlNNrTkvp2SzELJJ9EbS0">
+      <div class="path-step reveal" data-page-node-id="19R2cWe3DnN9g80UWUq2Im">
+        <div class="num" data-page-node-id="41edgYSp6GrJT8L1Kkgy6D">1</div>
+        <div class="body" data-page-node-id="X3zSaMEoD74B6dLaT5YuYj">
+          <h4 data-page-node-id="R4eZOMbK2jIPMPAYcPg2jd">基础入门 · H3 与提示词</h4>
+          <p data-page-node-id="WCQ2WzZ3vBB44mB8wgSoU9">认识 MiniMax H3 模型能力边界，学习文生视频、首尾帧、全能参考三种模式，
+             掌握基础提示词公式（主体+动作+镜头+风格+节奏）。每月一次集中培训。</p>
+        </div>
+      </div>
+      <div class="path-step reveal" data-page-node-id="4XPMFqFBngq1NGRhPrMuvm">
+        <div class="num" data-page-node-id="C64S80QoO6oyzlOPzMAai4">2</div>
+        <div class="body" data-page-node-id="ccAUvm843bNUHVxPhpiwg8">
+          <h4 data-page-node-id="UOZ6c0UIgvZwH0K4mBlhUb">进阶 · ComfyUI 工作流与多模态</h4>
+          <p data-page-node-id="jVsBJoH4D4ZYDB5YWKhSXF">搭建自己的 ComfyUI 流水线，串联图/视频/音频多模态参考，
+             学习角色一致性控制、镜头语言拆解、声音克隆与迁移。</p>
+        </div>
+      </div>
+      <div class="path-step reveal" data-page-node-id="mbYxTJsL65psoAXy9c6UWJ">
+        <div class="num" data-page-node-id="fjLRgmFP334EEEU9EbTpbD">3</div>
+        <div class="body" data-page-node-id="xxOFFuIMi4iFXzL0cHWEV3">
+          <h4 data-page-node-id="rj3oDAyrcNidQNlKwNZ9Yn">实战 · 真实项目分组练手</h4>
+          <p data-page-node-id="Os8sEcnIKK0pmoGBRYLy0k">分组承接部门宣传片或原创短剧任务，从剧本→分镜→生成→后期→交付
+             全流程实战。导师带组，每月一次作品互评。</p>
+        </div>
+      </div>
+      <div class="path-step reveal" data-page-node-id="fyIrNZICydIwOZfge1KaLQ">
+        <div class="num" data-page-node-id="xM1qmQXZfE9Ll5yEGk7vnh">4</div>
+        <div class="body" data-page-node-id="EVOAfaK2wnCHRAqoCmsBe3">
+          <h4 data-page-node-id="52LGWsRq4j79fMPBQl1hdO">展映与分享 · 校园发声</h4>
+          <p data-page-node-id="irRnF0rj0UpWWHsk7r0n8H">举办社团作品展映会、技术分享会、跨院校 AIGC 交流日，
+             把作品推上校级舞台，对外输出影响力。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= REQUIREMENTS & JOIN ============= -->
+<section id="join" data-page-node-id="BML4UrnkjGVZYbcuO5fRpl">
+  <div class="container" data-page-node-id="tMbHurltTSF2ZXagUV81Lf">
+    <div class="reveal" data-page-node-id="b7Z6jbILkCuEawM5UDKdYd">
+      <span class="eyebrow" data-page-node-id="bwUjeqe55O8WVAderC7qJ6">招新信息</span>
+      <h2 data-page-node-id="mO6FMFMsLO2t2xN9YFqXjA">我们要找这样的<span class="grad" data-page-node-id="lX0Hz07ZkCaX0B8frqx7Fz">你</span></h2>
+      <p class="section-sub" data-page-node-id="gUDA8HFBDgnQawziAScQxC">不限专业、不限年级、不限基础——只要你满足以下任意三条。</p>
+    </div>
+
+    <div class="req-wrap" data-page-node-id="RBBc33WrBEbD8lLDqGeAvY">
+      <div class="req-card reveal" data-page-node-id="msZxavffcwesHuBo9gG0Ql">
+        <h4 data-page-node-id="96s2VPbe2j2lTcJd7INUNQ">✦ 我们希望你具备</h4>
+        <ul data-page-node-id="w24945ojlQYSQT9pBFzpli">
+          <li data-page-node-id="AlWyIB0ib1birwToGrA2KG">对 AIGC / 视频创作 / 影视特效有强烈兴趣</li>
+          <li data-page-node-id="9ImZmw7BvI2khpkr3eMyz3">愿意动手实践而非只看不练</li>
+          <li data-page-node-id="MFzTl01FAM2r2Fybubj7We">能坚持参加每月社团活动</li>
+          <li data-page-node-id="O7jG3cCxUUaYvKO1S76NnN">具备基本的电脑操作与文档协作能力</li>
+          <li data-page-node-id="q2t5NHeVDGrbxBSInry7w4">有剧本/分镜/摄影/后期/AI 绘图任一基础者更佳</li>
+        </ul>
+      </div>
+      <div class="qr-card reveal" data-page-node-id="t3QTGReDKbzdAQ4qSDERA7">
+        <h4 data-page-node-id="FxnyaY6rCchVPp4tuFIopw">扫码加入我们</h4>
+        <p class="sub" data-page-node-id="xITWhPOOq2iFU2bz0AvO3g">AIGC 视界社 · 招新社群<br data-page-node-id="W9DKgCKtKbMkrEIGbSI2Se"/>扫码即可加入，与同好一起开启创作</p>
+        <div class="qr-img" data-page-node-id="OuayRKFuCHh6YTlqboZ5sF">
+          <img src="assets/qrcode.png" alt="AIGC视界社招新群二维码" data-page-node-id="Y8BN8QHsF19mazKtIXx2bw" />
+        </div>
+        <div class="qr-note" data-page-node-id="q0ONeUNqDTQ0GEsp8KVOhD">⏱ 二维码 7 天内有效（9 月 15 日前）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= FOOTER ============= -->
+<footer data-page-node-id="DEyAP43iGdOiZqZfQhEVXj">
+  <div class="container" data-page-node-id="Czfei3a505kl7TxcXozgx8">
+    <div class="brand" data-page-node-id="CXa5JCRnMIVVwMPq7e7iGm">AIGC 视界社</div>
+    <div class="slogan" data-page-node-id="i33BoiTLnLCFSt7C60Krvo">打开 AI 时代的创作视界</div>
+    <div class="meta" data-page-node-id="wTfC47d5H2qQpB5ITfEIiA">
+      <span data-page-node-id="RNxb9uaiS5pWLe5py6lThp">🎬 AIGC 视界社</span>
+      <span data-page-node-id="GuuiylGWFa06MM4iJ9gaK3">🚀 Powered by MiniMax H3 × ComfyUI</span>
+    </div>
+    <div class="meta" style="margin-top: 16px;" data-page-node-id="vAzauiUKSBMN7eLV9gexBR">
+      <span data-page-node-id="WwrXHQ059BRNFaKOgM67px">© 2026 AIGC 视界社 · 保留所有权利</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // 滚动淡入
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
